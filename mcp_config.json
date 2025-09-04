@@ -1,0 +1,7 @@
+{
+  "weather": {
+    "command": "uv",
+    "args": ["run", "python", "server/mcp_server_local.py"],
+    "transport": "stdio"
+  }
+}
