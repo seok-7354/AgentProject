@@ -238,13 +238,17 @@ uv run langgraph dev
 
 ## 지원 모델
 
-템플릿은 OpenRouter를 통해 사용 가능한 모든 모델을 지원합니다. 인기 있는 선택지는 다음과 같습니다:
+템플릿은 OpenRouter를 통해 사용 가능한 모든 모델을 지원합니다. 
 
-- `anthropic/claude-3-5-sonnet-20241022` (기본값)
-- `openai/gpt-4-turbo`
-- `openai/gpt-4o`
-- `meta-llama/llama-3.1-405b-instruct`
-- `google/gemini-pro-1.5`
+주요 선택지는 다음과 같습니다.
+- `openai/gpt-4.1` (기본값)
+- `anthropic/claude-sonnet-4`
+- `google/gemini-2.5-flash`
+- `qwen/qwen3-30b-a3b`
+
+OpenRouter 페이지에서 모델을 확인할 수 있습니다.
+[OpenRouter Models](https://openrouter.ai/models)
+
 
 ## 문제 해결
 
@@ -292,7 +296,7 @@ uv run langgraph dev
 ### 개발 설정
 
 ```bash
-git clone https://github.com/<your-username>/langgraph-mcp-agent-template.git
+git clone https://github.com/teddynote-lab/langgraph-mcp-agent-template.git
 cd langgraph-mcp-agent-template
 uv sync --dev
 uv run pytest  # 테스트 실행 (사용 가능한 경우)
