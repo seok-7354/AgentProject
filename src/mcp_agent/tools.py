@@ -41,11 +41,23 @@ async def get_mcp_tools(mcp_config: dict) -> List[Any]:
         return []
 
 
-async def get_all_tools() -> List[Callable[..., Any]]:
-    """MCP 도구를 가져옵니다."""
+async def get_all_tools(runtime_context: Context = None) -> List[Callable[..., Any]]:
+    """MCP 도구를 가져옵니다.
+    
+    Args:
+        runtime_context: Context 객체 (None이면 get_runtime()으로 가져옴)
+    """
     try:
-        runtime = get_runtime(Context)
-        config_path = runtime.context.mcp_config_path
+        # Context 가져오기
+        if runtime_context is None:
+            runtime = get_runtime(Context)
+            if runtime is None or runtime.context is None:
+                # get_runtime()이 None을 반환하는 경우 기본값 사용
+                runtime_context = Context()
+            else:
+                runtime_context = runtime.context
+        
+        config_path = runtime_context.mcp_config_path
         
         # MCP 설정 파일 존재 확인 및 로드
         if await aiofiles.os.path.exists(config_path):

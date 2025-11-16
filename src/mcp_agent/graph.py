@@ -17,14 +17,20 @@ async def agent_node(
 ) -> Dict[str, List[BaseMessage]]:
     """MCP 도구를 동적으로 로드하여 ReAct 에이전트를 실행합니다."""
     try:
+        # Context 확인 및 기본값 설정
+        if runtime is None or runtime.context is None:
+            context = Context()
+        else:
+            context = runtime.context
+        
         # MCP 도구 가져오기
-        tools = await get_all_tools()
+        tools = await get_all_tools(context)
 
-        # 모델 초기화
-        model = load_chat_model(runtime.context.model)
+        # 모델 초기화 (max_tokens 설정)
+        model = load_chat_model(context.model, max_tokens=context.max_tokens)
 
         # 시스템 프롬프트 포맷팅
-        system_prompt = runtime.context.system_prompt.format(
+        system_prompt = context.system_prompt.format(
             system_time=datetime.now(tz=UTC).isoformat()
         )
 
